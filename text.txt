@@ -1,0 +1,44 @@
+<script>
+  let yesSize = 22;
+  let noCount = 0;
+
+  const name = "Hawa";
+
+  const cuteMessages = [
+    `Aww ${name} 🥺 are you sure?`,
+    `${name}, the minion is crying now 😢`,
+    `That hurt a little, ${name} 💔`,
+    `I’ll ask nicely again, ${name} 😌`,
+    `Okay ${name} but… we’d be really cute 🥰`,
+    `Last chance ${name} 😭 my heart can’t take this`
+  ];
+
+  function noClicked() {
+    yesSize += 10;
+    document.getElementById("yesBtn").style.fontSize = yesSize + "px";
+
+    document.getElementById("message").innerText =
+      cuteMessages[Math.min(noCount, cuteMessages.length - 1)];
+    noCount++;
+
+    let sad = document.getElementById("sadSound");
+    sad.currentTime = 0;
+    sad.play();
+  }
+
+  function yesClicked() {
+    let love = document.getElementById("loveSound");
+    love.play();
+
+    confetti({
+      particleCount: 250,
+      spread: 90,
+      origin: { y: 0.6 }
+    });
+
+    document.body.innerHTML = `
+      <h1>YAYYYY!!! 💕🥰</h1>
+      <p>${name}, you just made me the happiest person 💘</p>
+    `;
+  }
+</script>
